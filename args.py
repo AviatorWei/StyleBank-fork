@@ -3,7 +3,7 @@ import os
 
 device = torch.device("cuda")
 
-batch_size = 4
+batch_size = 5
 lr = 0.001
 T = 2
 CONTENT_WEIGHT = 1
@@ -12,9 +12,9 @@ REG_WEIGHT = 1e-5
 
 continue_training = True
 
-CONTENT_IMG_DIR = 'coco'
-STYLE_IMG_DIR = 'style_img'
-MODEL_WEIGHT_DIR = 'weights_test'
+CONTENT_IMG_DIR = 'test/content'
+STYLE_IMG_DIR = 'test/style'
+MODEL_WEIGHT_DIR = 'weights_new'
 BANK_WEIGHT_DIR = os.path.join(MODEL_WEIGHT_DIR, 'bank')
 BANK_WEIGHT_PATH = os.path.join(BANK_WEIGHT_DIR, '{}.pth')
 MODEL_WEIGHT_PATH = os.path.join(MODEL_WEIGHT_DIR, 'model.pth')
@@ -24,5 +24,6 @@ GLOBAL_STEP_PATH = os.path.join(MODEL_WEIGHT_DIR, 'global_step.log')
 
 K = 1000
 MAX_ITERATION = 300 * K
+SAVE_MODEL_POINT = 10 * K
 ADJUST_LR_ITER = 10 * K
 LOG_ITER = 1 * K

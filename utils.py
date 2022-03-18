@@ -13,6 +13,18 @@ def showimg(img):
 	plt.imshow(img)
 	plt.show()
 
+class FillBlack(object):
+    def __init__(self, size):
+        self.size = size
+        
+    def __call__(self, image, max_size=512, fill_color=(0, 0, 0, 0)):
+        print(type(image))
+        x, y = image.size
+        size = max(max_size, x, y)
+        new_im = Image.new('RGB', (size, size), fill_color)
+        new_im.paste(image, (int((size - x) / 2), int((size - y) / 2)))
+        return new_im
+    
 class Resize(object):
 	"""
 	Resize with aspect ration preserved.
@@ -41,9 +53,14 @@ def get_sid_batch(style_id_seg, batch_size):
 	
 	return ret[:batch_size]
 
+content_img_fill = transforms.Compose([
+#     FillBlack(1620),
+    transforms.ToTensor(),
+])
+
 content_img_transform = transforms.Compose([
 	Resize(513),
-	transforms.RandomCrop([513, 513]),
+	transforms.CenterCrop([513, 513]),
 	transforms.ToTensor(),
 ])
 
